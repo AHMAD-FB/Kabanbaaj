@@ -110,7 +110,7 @@ async def save(client: Client, message: Message):
             if batch_temp.IS_BATCH.get(message.from_user.id): break
             user_data = await db.get_session(message.from_user.id)
             if user_data is None:
-                await message.reply("**For Downloading Restricted Content You Have To /login First.**")
+                await message.reply("**بو داونلودکرنا (وێنە و ڤیدیو و دەنگ و فایل و هتد...) لدەستپێکێ فەرمانا /login کلیک بکە و ئەکاونتا خو داخل بکە.**")
                 batch_temp.IS_BATCH[message.from_user.id] = True
                 return
             try:
