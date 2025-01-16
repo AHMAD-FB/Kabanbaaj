@@ -127,7 +127,7 @@ async def save(client: Client, message: Message):
                     await handle_private(client, acc, message, chatid, msgid)
                 except Exception as e:
                     if ERROR_MESSAGE == True:
-                        await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
+                        await client.send_message(message.chat.id, f"خەلەتە: {e}", reply_to_message_id=message.id)
     
             # bot
             elif "https://t.me/b/" in message.text:
