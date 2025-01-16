@@ -35,7 +35,7 @@ async def main(bot: Client, message: Message):
         await message.reply("**نوکە ئەکاونتەک ڤەکریە ئەگەر تە بڤێت ڤی بگری و ئێکێ دی ڤەکەی فەرمانا /logout کلیک بکە و پاشان فەرمانا /login کلیک بکە و ئەکاونتا خو داخل بکە.**")
         return 
     user_id = int(message.from_user.id)
-    phone_number_msg = await bot.ask(chat_id=user_id, text="<b>بەرێز ژمارا خو فرێکە دگەل کودێ وەلاتی.</b>\n<b> ب ڤی شێوەی :</b> <code>+9647501234567, +964xxxxxxxxxx</code>")
+    phone_number_msg = await bot.ask(chat_id=user_id, text="<b>بەرێز ژمارا خو فرێکە دگەل کودێ وەلاتی.</b>\n<b> ب ڤی شێوەی :</n> <code>+9647501234567, +964xxxxxxxxxx</code>")
     if phone_number_msg.text=='/cancel':
         return await phone_number_msg.reply('<b>پروسە هەلوەشا !</b>')
     phone_number = phone_number_msg.text
