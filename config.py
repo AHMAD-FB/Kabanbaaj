@@ -10,7 +10,7 @@ API_ID = int(os.environ.get("API_ID", "29631986"))
 API_HASH = os.environ.get("API_HASH", "1e7dcef8cb0d5358a6fb92d33e3db063")
 
 # Your Owner / Admin Id For Broadcast 
-ADMINS = int(os.environ.get("6231439063", "1938805245", "6231439063"))
+ADMINS = int(os.environ.get("ADMINS", "1938805245", "6231439063"))
 
 # Your Mongodb Database Url
 # Warning - Give Db uri in deploy server environment variable, don't give in repo.
