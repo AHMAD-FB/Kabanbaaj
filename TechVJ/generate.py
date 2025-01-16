@@ -26,16 +26,16 @@ async def logout(client, message):
     if user_data is None:
         return 
     await db.set_session(message.from_user.id, session=None)  
-    await message.reply("**Logout Successfully** ♦")
+    await message.reply("**ب سەرکەفتیانە ژ ئەکاونتی دەرکەفت** ♦")
 
 @Client.on_message(filters.private & ~filters.forwarded & filters.command(["login"]))
 async def main(bot: Client, message: Message):
     user_data = await db.get_session(message.from_user.id)
     if user_data is not None:
-        await message.reply("**Your Are Already Logged In. First /logout Your Old Session. Then Do Login.**")
+        await message.reply("**نوکە ئەکاونتەک ڤەکریە ئەگەر تە بڤێت ڤی بگری و ئێکێ دی ڤەکەی فەرمانا /logout کلیک بکە و پاشان فەرمانا /login کلیک بکە و ئەکاونتا خو داخل بکە.**")
         return 
     user_id = int(message.from_user.id)
-    phone_number_msg = await bot.ask(chat_id=user_id, text="<b>Please send your phone number which includes country code</b>\n<b>Example:</b> <code>+13124562345, +9171828181889</code>")
+    phone_number_msg = await bot.ask(chat_id=user_id, text="<b>بەرێز ژمارا خو فرێکە دگەل کودێ وەلاتی.</b>\n<b>ب ڤی شێوەی:</b> <code>+9647501234567, +964xxxxxxxxxx</code>")
     if phone_number_msg.text=='/cancel':
         return await phone_number_msg.reply('<b>process cancelled !</b>')
     phone_number = phone_number_msg.text
