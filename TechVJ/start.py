@@ -90,14 +90,14 @@ async def send_cancel(client: Client, message: Message):
     batch_temp.IS_BATCH[message.from_user.id] = True
     await client.send_message(
         chat_id=message.chat.id, 
-        text="**Batch Successfully Cancelled.**"
+        text="**ب سەرکەفتیانە هاتە هەلوەشاندن.**"
     )
 
 @Client.on_message(filters.text & filters.private)
 async def save(client: Client, message: Message):
     if "https://t.me/" in message.text:
         if batch_temp.IS_BATCH.get(message.from_user.id) == False:
-            return await message.reply_text("**One Task Is Already Processing. Wait For Complete It. If You Want To Cancel This Task Then Use - /cancel**")
+            return await message.reply_text("**ئەرکەک یێ د پروسێ دا چاڤەرێ بکە هەتا خلاس دبیت./n ئەگەر تە بڤێت ڤی ئەرکی هەلوەشینی فەرمانا /cancel کلیک بکە.**")
         datas = message.text.split("/")
         temp = datas[-1].replace("?single","").split("-")
         fromID = int(temp[0].strip())
