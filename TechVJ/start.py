@@ -97,7 +97,7 @@ async def send_cancel(client: Client, message: Message):
 async def save(client: Client, message: Message):
     if "https://t.me/" in message.text:
         if batch_temp.IS_BATCH.get(message.from_user.id) == False:
-            return await message.reply_text("**ئەرکەک یێ د پروسێ دا چاڤەرێ بکە هەتا خلاس دبیت./n ئەگەر تە بڤێت ڤی ئەرکی هەلوەشینی فەرمانا /cancel کلیک بکە.**")
+            return await message.reply_text("**ئەرکەک یێ د پروسێ دا چاڤەرێ بکە هەتا خلاس دبیت. ئەگەر تە بڤێت ڤی ئەرکی هەلوەشینی فەرمانا /cancel کلیک بکە.**")
         datas = message.text.split("/")
         temp = datas[-1].replace("?single","").split("-")
         fromID = int(temp[0].strip())
@@ -118,7 +118,7 @@ async def save(client: Client, message: Message):
                 await acc.connect()
             except:
                 batch_temp.IS_BATCH[message.from_user.id] = True
-                return await message.reply("**Your Login Session Expired. So /logout First Then Login Again By - /login**")
+                return await message.reply("**چونە ژورا ئەکاونتێ تە یا ب سەرڤە چوی. لدەست پێکێ فەرمانا /logout کلیک بکە و پاشان فەرمانا /login کلیک بکە و ئەکاونتا خو داخل بکە.**")
             
             # private
             if "https://t.me/c/" in message.text:
@@ -136,7 +136,7 @@ async def save(client: Client, message: Message):
                     await handle_private(client, acc, message, username, msgid)
                 except Exception as e:
                     if ERROR_MESSAGE == True:
-                        await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
+                        await client.send_message(message.chat.id, f"خەلەتە: {e}", reply_to_message_id=message.id)
             
             # public
             else:
@@ -145,7 +145,7 @@ async def save(client: Client, message: Message):
                 try:
                     msg = await client.get_messages(username, msgid)
                 except UsernameNotOccupied: 
-                    await client.send_message(message.chat.id, "The username is not occupied by anyone", reply_to_message_id=message.id)
+                    await client.send_message(message.chat.id, "ئەڤ ناڤە خەلەتە ", reply_to_message_id=message.id)
                     return
                 try:
                     await client.copy_message(message.chat.id, msg.chat.id, msg.id, reply_to_message_id=message.id)
@@ -154,7 +154,7 @@ async def save(client: Client, message: Message):
                         await handle_private(client, acc, message, username, msgid)               
                     except Exception as e:
                         if ERROR_MESSAGE == True:
-                            await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
+                            await client.send_message(message.chat.id, f"خەلەتە: {e}", reply_to_message_id=message.id)
 
             # wait time
             await asyncio.sleep(3)
@@ -185,7 +185,7 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
         os.remove(f'{message.id}downstatus.txt')
     except Exception as e:
         if ERROR_MESSAGE == True:
-            await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML) 
+            await client.send_message(message.chat.id, f"خەلەتە: {e}", reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML) 
         return await smsg.delete()
     if batch_temp.IS_BATCH.get(message.from_user.id): return 
     asyncio.create_task(upstatus(client, f'{message.id}upstatus.txt', smsg, chat))
@@ -206,7 +206,7 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
             await client.send_document(chat, file, thumb=ph_path, caption=caption, reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML, progress=progress, progress_args=[message,"up"])
         except Exception as e:
             if ERROR_MESSAGE == True:
-                await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML)
+                await client.send_message(message.chat.id, f"خەلەتە: {e}", reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML)
         if ph_path != None: os.remove(ph_path)
         
 
@@ -228,21 +228,21 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
             await client.send_animation(chat, file, reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML)
         except Exception as e:
             if ERROR_MESSAGE == True:
-                await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML)
+                await client.send_message(message.chat.id, f"خەلەتە: {e}", reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML)
         
     elif "Sticker" == msg_type:
         try:
             await client.send_sticker(chat, file, reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML)
         except Exception as e:
             if ERROR_MESSAGE == True:
-                await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML)     
+                await client.send_message(message.chat.id, f"خەلەتە: {e}", reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML)     
 
     elif "Voice" == msg_type:
         try:
             await client.send_voice(chat, file, caption=caption, caption_entities=msg.caption_entities, reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML, progress=progress, progress_args=[message,"up"])
         except Exception as e:
             if ERROR_MESSAGE == True:
-                await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML)
+                await client.send_message(message.chat.id, f"خەلەتە: {e}", reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML)
 
     elif "Audio" == msg_type:
         try:
@@ -254,7 +254,7 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
             await client.send_audio(chat, file, thumb=ph_path, caption=caption, reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML, progress=progress, progress_args=[message,"up"])   
         except Exception as e:
             if ERROR_MESSAGE == True:
-                await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML)
+                await client.send_message(message.chat.id, f"خەلەتە: {e}", reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML)
         
         if ph_path != None: os.remove(ph_path)
 
@@ -263,7 +263,7 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
             await client.send_photo(chat, file, caption=caption, reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML)
         except:
             if ERROR_MESSAGE == True:
-                await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML)
+                await client.send_message(message.chat.id, f"خەلەتە: {e}", reply_to_message_id=message.id, parse_mode=enums.ParseMode.HTML)
     
     if os.path.exists(f'{message.id}upstatus.txt'): 
         os.remove(f'{message.id}upstatus.txt')
