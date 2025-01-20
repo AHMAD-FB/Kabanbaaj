@@ -32,7 +32,7 @@ async def logout(client, message):
 async def main(bot: Client, message: Message):
     user_data = await db.get_session(message.from_user.id)
     if user_data is not None:
-        await message.reply("**نوکە ئەکاونتەک ڤەکریە ئەگەر تە بڤێت ڤی بگری و ئێکێ دی ڤەکەی فەرمانا /logout کلیک بکە و پاشان فەرمانا /login کلیک بکە و ئەکاونتا خو داخل بکە.**")
+        await message.reply("**نوکە ئەکاونتەک ڤەکریە ئەگەر تە  بڤێت ڤی بگری و ئێکێ دی ڤەکەی فەرمانا /logout کلیک بکە و پاشان فەرمانا /login کلیک بکە و ئەکاونتا خو داخل بکە.**")
         return 
     user_id = int(message.from_user.id)
     phone_number_msg = await bot.ask(chat_id=user_id, text="<b>بەرێز ژمارا خو فرێکە دگەل کودێ وەلاتی.</b>\n<b> ب ڤی شێوەی :</n> <code>+9647501234567, +964xxxxxxxxxx</code>")
